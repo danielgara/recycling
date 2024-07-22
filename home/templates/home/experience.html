@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6 col-lg-8 col-xl-6 mx-auto mb-3">
+        <b>Puntos de experiencia</b>
+        <hr />
+        <p class="font-13 rc-footer-font">Reciclar correctamente no solo beneficia al medio ambiente, ¡también te permite ganar puntos
+          de experiencia y contribuir a un mundo más sostenible! El proceso es simple: identifica los diferentes tipos de residuos y 
+          clasifícalos en las canecas adecuadas.</p>
+        <p class="font-13 rc-footer-font">Simplemente debes dirigirte a las canecas de SASVAR, (i) tomar foto al artículo que vas a depositar
+          mediante la cámara ubicada en la caneca, (ii) depositar el residuo en la caneca correspondiente, y (iii) escanear con tu celular el 
+          código QR que verás en la pantalla de la caneca.</p>
+        <p class="font-13 rc-footer-font">La clave para maximizar tus puntos de experiencia radica en la constancia y la precisión al clasificar 
+          los residuos. Mantener un hábito responsable de reciclaje no solo fortalece tu impacto ambiental, sino que también te convierte en un
+          agente activo de cambio. ¡Cada pequeña acción cuenta!</p>
+      </div>
+      <div class="col-md-6 col-lg-8 col-xl-6 mx-auto mb-3 text-center">
+        <img src="{% static 'images/experience.png' %}" class="max-width-100 rounded-3" alt="about" />
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %} 

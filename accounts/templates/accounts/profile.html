@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-lg-4">
+        <div class="card mb-4 shadow-lg p-3 mb-4 bg-white rounded border-0">
+          <form method="post" enctype="multipart/form-data" id="profilePicForm">
+            {% csrf_token %}
+            <div class="card-body text-center ">
+              {% if viewData.user.profile_picture %}
+              <img src="{{ viewData.user.profile_picture.url }}" alt="avatar"
+                class="rounded-circle img-fluid img-profile">
+              {% else %}
+              <img src="{% static 'images/ava3.webp' %}" alt="avatar"
+                class="rounded-circle img-fluid img-profile">
+              {% endif %}
+              <h5 class="my-3 mb-1">{{ viewData.user.username }}</h5>
+              <h6 class="text-muted mb-3">({{ viewData.user.experience_points }} EXP)</h6>
+              <div class="d-flex justify-content-center mb-2">
+                <input type="file" id="profilePicInput" name="profile_pic" style="display: none;">
+                <label for="profilePicInput" class="btn btn-primary">Editar imagen</label>
+                <button type="submit" class="btn btn-success" style="display: none;">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4 shadow-lg p-3 mb-4 bg-white rounded border-0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nombre de usuario</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ viewData.user.username }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ viewData.user.email }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Puntos EXP</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ viewData.user.experience_points }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">División actual</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0 fw-bold">
+                  <a class="text-decoration-none" href="{% url 'accounts.rankings' %}">{{ viewData.ranking.name }}</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript code -->
+<script>
+    $(document).ready(function() {
+        $('#profilePicInput').on('change', function() {
+            $('#profilePicForm').submit();
+        });
+    });
+</script>
+
+{% endblock content %}

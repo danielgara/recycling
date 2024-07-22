@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!-- Content section 1-->
+<section id="scroll">
+  <div class="container px-5">
+    <div class="row gx-5 align-items-center">
+      <div class="col-lg-6 order-lg-2">
+        <div class="p-5"><img class="img-fluid img-maxh350" src="{% static 'images/home/recycle.png' %}" /></div>
+      </div>
+      <div class="col-lg-6 order-lg-1">
+        <div class="p-5">
+          <h2 class="display-4">Learn to recycle</h2>
+          <p>Explore the benefits of recycling with our comprehensive guide. Learn to recycle efficiently and
+            effectively, turning waste into valuable resources while reducing your environmental footprint. Our
+            easy-to-follow tips and techniques will empower you to make a positive impact on the planet, one recyclable
+            item at a time. Join us on the journey to a greener, more sustainable future.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Content section 2-->
+<section>
+  <div class="container px-5">
+    <div class="row gx-5 align-items-center">
+      <div class="col-lg-6">
+        <div class="p-5"><img class="img-fluid img-maxh350" src="{% static 'images/home/scan.png' %}" /></div>
+      </div>
+      <div class="col-lg-6">
+        <div class="p-5">
+          <h2 class="display-4">Scan your disposal</h2>
+          <p>Unlock the power of smart recycling with our 'Scan Your Disposals' feature. By simply taking a photo of an
+            item, our app instantly identifies the material and provides clear, step-by-step
+            instructions on how to recycle it properly. This innovative technology ensures that every piece of waste is
+            disposed of correctly, making recycling easier and more efficient than ever before. Embrace the convenience
+            of scanning your disposals and contribute to a cleaner, greener planet</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Content section 3-->
+<section>
+  <div class="container px-5">
+    <div class="row gx-5 align-items-center">
+      <div class="col-lg-6 order-lg-2">
+        <div class="p-5"><img class="img-fluid img-maxh350" src="{% static 'images/home/points.png' %}" /></div>
+      </div>
+      <div class="col-lg-6 order-lg-1">
+        <div class="p-5">
+          <h2 class="display-4">Collect points</h2>
+          <p>Turn your recycling efforts into rewards with our 'Collect Points' feature. Each time you properly dispose
+            of recyclable materials using our app, you'll earn points that can be redeemed for various eco-friendly
+            rewards and incentives. This gamified approach not only makes recycling fun but also motivates you to stay
+            committed to your sustainability goals. Start collecting points today and enjoy the satisfaction of
+            contributing to a greener planet while earning rewards for your eco-conscious actions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3">
+        <b>Recycling Bin Colors</b>
+        <hr />
+        <p>Recycling bins are essential components of modern waste management systems, designed to streamline the
+          process of sorting and disposing of recyclable materials. Their primary purpose is to facilitate the
+          separation of waste into categories that can be processed and repurposed, reducing the overall burden on
+          landfills and minimizing environmental impact. By using designated bins for different types of waste,
+          communities can significantly enhance the efficiency of recycling programs and contribute to a more
+          sustainable future.</p>
+
+        <p>The color-coded system for recycling bins helps individuals easily identify and sort various types of waste.
+          Commonly used colors such as green, white, and black are associated with specific categories: organic waste,
+          certain plastics, and general waste, respectively. This system simplifies the recycling process by guiding
+          users on where to place items like food scraps, plastic bottles, and non-recyclable materials. Adhering to
+          these color-coded guidelines ensures that waste is correctly processed and reduces contamination in recycling
+          streams.</p>
+
+        <p>Proper use of recycling bins not only supports environmental conservation but also promotes public awareness
+          about waste management. When people understand and follow recycling practices, they contribute to reducing
+          pollution, conserving natural resources, and fostering a circular economy. By embracing these practices and
+          educating others, communities can collectively work towards a cleaner, greener planet.</p>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3 text-center">
+        <img class="img-fluid img-maxh350" src="{% static 'images/learn/sec-3.png' %}" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3">
+        <b>Black Bin</b>
+        <hr />
+        <p><strong>Purpose:</strong> General Waste (sometimes used for landfill waste)</p>
+        <ul>
+          <li>Mixed waste that doesn’t fit into other categories</li>
+          <li>Non-recyclable packaging</li>
+          <li>Used tissues and paper towels</li>
+          <li>Certain food packaging (chip bags, candy wrappers)</li>
+          <li>Broken household items (non-recyclable)</li>
+        </ul>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3 text-center">
+        <img class="img-fluid img-maxh350" src="{% static 'images/learn/black.png' %}" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3">
+        <b>White bin</b>
+        <hr />
+        <p><strong>Purpose:</strong> Specific Plastic Types, Paper, and Cardboard</p>
+        <ul>
+          <li>PET bottles (soda, water)</li>
+          <li>HDPE containers (milk jugs, detergent bottles)</li>
+          <li>Newspapers</li>
+          <li>Magazines</li>
+          <li>Office paper</li>
+          <li>Cardboard boxes</li>
+          <li>Paper packaging</li>
+        </ul>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3 text-center">
+        <img class="img-fluid img-maxh350" src="{% static 'images/learn/white.png' %}" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3">
+        <b>Green bin</b>
+        <hr />
+        <p><strong>Purpose:</strong> Organic Waste</p>
+        <ul>
+          <li>Food scraps (vegetables, fruit peels)</li>
+          <li>Coffee grounds</li>
+          <li>Eggshells</li>
+          <li>Yard waste (leaves, grass clippings)</li>
+          <li>Compostable food packaging</li>
+        </ul>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3 text-center">
+        <img class="img-fluid img-maxh350" src="{% static 'images/learn/green.png' %}" />
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

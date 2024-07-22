@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-3">
+  <div class="container mb-3">
+    <div class="row mt-3">
+      <div class="mx-auto mb-4">
+        <b>Historial de actividades</b>
+        <hr />
+        <table class="table table-bordered table-center">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Tipo de actividad</th>
+              <th scope="col">Puntos acumulados</th>
+              <th scope="col">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entry in viewData.user_history_entries %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>Escaneo de QR</td>
+              <td><span class="fw-bold text-success">{{ entry.accumulated_points }}</span></td>
+              <td>{{ entry.created_at|date:"Y-m-d" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

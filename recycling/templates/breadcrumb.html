@@ -1,0 +1,17 @@
+{% if viewData.breadcrumbItems %}
+<section class="p-3 rc-breadcrumb">
+  <div class="container d-flex justify-content-between">
+    <div class="me-5 rc-header-top-contact">
+      {% for item in viewData.breadcrumbItems %}
+        {% if forloop.first %} 
+          <span><a href="{% url item.route %}">{{ item.name }}</a></span>
+        {% elif forloop.last %}
+          <span class="rc-breadcrumb-item">{{ item.name }}</span>
+        {% else %}
+          <span class="rc-breadcrumb-item"><a href="{% url item.route %}">{{ item.name }}</a></span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

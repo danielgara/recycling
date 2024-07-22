@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3">
+        <b>Recyclable</b>
+        <hr />
+        <p><strong>Recyclable materials</strong> are those that can be reprocessed and turned into new products,
+          reducing the need for fresh resources and cutting down on waste. Items like paper, cardboard, glass, some
+          plastics, and metals fall into this category. When recycled correctly, these materials are cleaned, sorted,
+          and transformed into new products, helping to conserve resources and lessen the burden on landfills.</p>
+
+        <p><strong>Recyclable items</strong> can be converted into new products through specialized processes, which
+          minimizes the need for new raw materials and decreases waste. Common examples include paper, cardboard,
+          certain plastics, metals, and glass. By recycling these materials, you contribute to resource conservation and
+          waste reduction, as they are repurposed rather than disposed of in landfills.</p>
+
+        <p><strong>Materials that can be recycled</strong> are those that can undergo a transformation process to be
+          repurposed into new goods. Examples include paper, cardboard, glass, various plastics, and metals. This
+          process helps conserve natural resources and reduces the amount of waste that ends up in landfills, supporting
+          a more sustainable waste management system.</p>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3 text-center">
+        <img class="img-fluid img-maxh350 rounded" src="{% static 'images/learn/l2/rec.png' %}" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3">
+        <b>Non-Recyclable</b>
+        <hr />
+        <p><strong>Non-recyclable materials</strong> are items that cannot be processed through standard recycling
+          systems and typically end up in landfills or incinerators. These include plastic bags, certain food packaging,
+          and other contaminants. Proper disposal of these items is important to avoid contaminating recyclable
+          materials and to manage waste effectively.</p>
+
+        <p><strong>Materials that are non-recyclable</strong> cannot be processed into new products through traditional
+          recycling methods and usually need to be discarded as waste. Examples include certain types of plastics,
+          contaminated food containers, and plastic bags. Correctly managing these items helps prevent contamination of
+          recyclable waste and ensures responsible waste handling.</p>
+
+        <p><strong>Items classified as non-recyclable</strong> cannot be reprocessed through conventional recycling
+          systems and often end up in landfills or are incinerated. These include things like specific plastic types,
+          dirty food packaging, and plastic bags. Effective disposal of these materials is essential to maintaining the
+          integrity of recyclable waste and managing environmental impact.</p>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3 text-center">
+        <img class="img-fluid img-maxh350 rounded" src="{% static 'images/learn/l2/non-rec.png' %}" />
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

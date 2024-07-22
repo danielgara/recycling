@@ -1,0 +1,25 @@
+.img-maxh200 {
+  max-height: 200px;
+}
+
+.img-maxh350 {
+  max-height: 350px;
+}
+
+.rc-breadcrumb{
+  background-color: lavender;
+}
+
+.rc-breadcrumb-item::before {
+  color: #7c7c7c;
+  content: "/";
+  display: inline-block;
+  font-family: "FontAwesome";
+  font-size: 10px;
+  padding: 0 8px 0 5px;
+}
+
+.rc-breadcrumb a, .rc-breadcrumb-item a {
+  color: var(--bs-body-color) !important;
+  text-decoration: none !important;
+}

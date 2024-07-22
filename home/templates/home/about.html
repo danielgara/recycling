@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="p-3">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3">
+        <b>Introducing Our Innovative Recycling App!</b>
+        <hr />
+        <p class="font-13 rc-footer-font">Our app is designed to make an eco-conscious life more accessible and
+          convenient. With an easy-to-use interface, it simplifies the process of disposing of waste in the correct
+          locations.</p>
+        <p class="font-13 rc-footer-font">By simply scanning a barcode or taking a photo of an item, our app identifies
+          the material and provides detailed instructions on how and where to recycle it correctly. Whether it’s
+          plastics, paper, glass, or electronic waste, our app guides users to the nearest recycling centers, collection
+          points, or drop-off locations.</p>
+        <p class="font-13 rc-footer-font">In addition to promoting responsible waste disposal, our app also tracks your
+          ecological efforts, providing information on your environmental impact, such as the amount of waste diverted
+          from landfills and the energy savings achieved through recycling. It even offers rewards and challenges to
+          encourage and motivate users to recycle more efficiently.</p>
+        <p class="font-13 rc-footer-font">Join us in the mission to reduce waste and protect our planet. With our
+          recycling app, not only will you make a positive impact on the environment, but you will also experience the
+          convenience of a sustainable life at your fingertips. Together, let’s contribute to a greener life and a
+          cleaner future.</p>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-3 text-center">
+        <img class="img-fluid img-maxh350" src="{% static 'images/about/recycle.png' %}" />
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

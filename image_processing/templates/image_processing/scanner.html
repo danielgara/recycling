@@ -1,0 +1,95 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/camera.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'js/camera.js' %}" crossorigin="anonymous"></script>
+
+<audio id="shuttersound">
+  <source src="{% static 'audio/camera_shutter.mp3' %}" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+
+<div class="row text-center">
+  <div class="col-12 mx-auto">
+      <div class="pt-2 learn-top-green">
+        <div class="container">
+          <div class="row align-items-center p-3">
+            <div class="col-12 col-sm-5 col-md-5 text-white mb-4 mb-sm-0">
+              <b class="title-level text-start text-white text-main-camera rc-no-a">ESCANEA TUS RESIDUOS</b>
+            </div>
+            <div class="col-12 col-sm-7 col-md-7">
+              <img src="{% static 'images/scanner/top-info.png' %}" class="img-max100" />
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="p-3">
+  <div class="container mt-2">
+    <div class="row text-center">
+      <div class="col-12 mx-auto">
+          <div class="p-3 learn-top-green-light sv-br-20">
+            <div class="container">
+              <div class="row align-items-center p-3">
+                <div class="col-12 mb-3 mb-sm-0">
+                  Utiliza nuestro escáner con tecnología SASVAR en <b>cualquier momento</b> y <b>lugar</b> para separar residuos conscientemente.
+                </div>
+              </div>
+              <div class="row">
+                <div class="mx-auto mb-4 d-flex justify-content-center">
+                  <div class="camera">
+                    <video id="video" class="sv-br-20">Video no disponible.</video>
+                    <img id="photo" class="mb-2 sv-br-20" style="display: none;" alt="La foto aparecerá en este espacio." />
+                    <canvas id="canvas" style="display: none;"> </canvas>
+                    <div class="camera-btn">
+                      <img id="startbutton" onclick="takepicture();" src="{% static 'images/scanner/button-takepicture.png' %}" style="max-height: 50px; cursor: pointer" />
+                      <button id="restartbutton" style="display: none;" onclick="restartvideo();" class="btn btn-dark sv-br-20">Retomar foto</button>
+                      <input type="hidden" id="csrfmiddlewaretoken" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                      <button id="scanbutton" style="display: none;" onclick="scanpicture('{{ viewData.api_key }}','{{ viewData.ip_server }}')" class="btn btn-dark sv-br-20">Analizar residuo</button>
+                    </div>
+                    <div id="scanspinner" class="d-flex justify-content-center d-none">
+                      <div class="spinner-border mb-4 mt-4" role="status">
+                        <span class="sr-only">Cargando...</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="scanmodal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content learn-top-blue sv-br-20">
+      <div class="modal-header"></div>
+      <div class="modal-body">
+        <div class="row align-items-center p-3">
+          <div class="col-6 text-start mb-4 mb-sm-0">
+            <b>Tu residuo es:</b><br /><br />
+            <b id="scanresponse" class="title-level-no-size text-start rc-no-a font-size-main"></b><br /><br />
+            <span class="font-learn13">Este va en la caneca <b id="m-bin"></b>.</span>
+          </div>
+          <div class="col-6">
+            <img src="{% static 'images/scanner/white.png' %}" class="img-max100 img-maxw300 d-none" id="m-img1" />
+            <img src="{% static 'images/scanner/black.png' %}" class="img-max100 img-maxw300 d-none" id="m-img2" />
+            <img src="{% static 'images/scanner/green.png' %}" class="img-max100 img-maxw300 d-none" id="m-img3" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="closemodal()" class="btn btn-secondary sv-br-20" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %} 
