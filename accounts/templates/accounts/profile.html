@@ -20,8 +20,8 @@
               <h6 class="text-muted mb-3">({{ viewData.user.experience_points }} EXP)</h6>
               <div class="d-flex justify-content-center mb-2">
                 <input type="file" id="profilePicInput" name="profile_pic" style="display: none;">
-                <label for="profilePicInput" class="btn btn-primary">Editar imagen</label>
-                <button type="submit" class="btn btn-success" style="display: none;">Guardar</button>
+                <label for="profilePicInput" class="btn btn-primary">Edit image</label>
+                <button type="submit" class="btn btn-success" style="display: none;">Save</button>
               </div>
             </div>
           </form>
@@ -32,7 +32,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Nombre de usuario</p>
+                <p class="mb-0">Username</p>
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{ viewData.user.username }}</p>
@@ -50,7 +50,7 @@
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Puntos EXP</p>
+                <p class="mb-0">EXP Points</p>
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0">{{ viewData.user.experience_points }}</p>
@@ -59,12 +59,21 @@
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">División actual</p>
+                <p class="mb-0">Current Division</p>
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0 fw-bold">
                   <a class="text-decoration-none" href="{% url 'accounts.rankings' %}">{{ viewData.ranking.name }}</a>
                 </p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Statistics</p>
+              </div>
+              <div class="col-sm-9">
+                <a href="{% url 'accounts.stats' %}" class="btn btn-primary">View Stats</a>
               </div>
             </div>
           </div>

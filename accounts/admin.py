@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Ranking, Code, UserHistory, Waste
+from .models import User, Ranking, Code, UserHistory, Waste, ScanningStatistics
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.admin import ModelAdmin
 import csv
@@ -127,4 +127,24 @@ class WasteAdmin(ModelAdmin):
             formfield.label = 'Versión del modelo'
         elif db_field.name == 'success':
             formfield.label = 'Éxito'
+        return formfield
+
+
+@admin.register(ScanningStatistics)
+class ScanningStatisticsAdmin(ModelAdmin):
+    list_display = ['user', 'waste_type', 'bin_type', 'scan_date']
+    list_filter = ['waste_type', 'bin_type', 'scan_date']
+    search_fields = ['user__username', 'waste_type', 'bin_type']
+    date_hierarchy = 'scan_date'
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name == 'waste_type':
+            formfield.label = 'Tipo de residuo'
+        elif db_field.name == 'bin_type':
+            formfield.label = 'Tipo de caneca'
+        elif db_field.name == 'scan_date':
+            formfield.label = 'Fecha de escaneo'
+        elif db_field.name == 'user':
+            formfield.label = 'Usuario'
         return formfield

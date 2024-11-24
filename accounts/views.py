@@ -3,11 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect
 from .forms import UserCreateForm
-from .models import User, Ranking, UserHistory, Waste
+from .models import User, Ranking, UserHistory, Waste, ScanningStatistics
 from django.db import IntegrityError
 from .utils import decrypt_message
 import json
 from datetime import datetime
+from django.db import models
 
 
 @login_required
@@ -20,8 +21,8 @@ def custom_login(request):
     viewData = {}
     viewData["title"] = "Iniciar Sesión"
     viewData["breadcrumbItems"] = [
-        {"name": "Inicio", "route": "home.index"},
-        {"name": "Iniciar Sesión", "route": "accounts.login"},
+        {"name": "Home", "route": "home.index"},
+        {"name": "Login", "route": "accounts.login"},
     ]
     if request.method == 'GET':
         return render(request, 'accounts/login.html', {"viewData": viewData})
@@ -46,8 +47,8 @@ def signup(request):
     viewData = {}
     viewData["title"] = "Registro"
     viewData["breadcrumbItems"] = [
-        {"name": "Inicio", "route": "home.index"},
-        {"name": "Registro", "route": "accounts.signup"},
+        {"name": "Home", "route": "home.index"},
+        {"name": "Signup", "route": "accounts.signup"},
     ]
 
     if request.method == 'GET':
@@ -90,9 +91,9 @@ def profile(request):
     viewData = {}
     viewData["title"] = "Perfil"
     viewData["breadcrumbItems"] = [
-        {"name": "Inicio", "route": "home.index"},
-        {"name": "Mi Cuenta", "route": "accounts.index"},
-        {"name": "Perfil", "route": "accounts.profile"},
+        {"name": "Home", "route": "home.index"},
+        {"name": "My Account", "route": "accounts.index"},
+        {"name": "Profile", "route": "accounts.profile"},
     ]
     viewData["user"] = request.user
     user_points = request.user.experience_points
@@ -106,8 +107,8 @@ def index(request):
     viewData = {}
     viewData["title"] = "Mi cuenta"
     viewData["breadcrumbItems"] = [
-        {"name": "Inicio", "route": "home.index"},
-        {"name": "Mi Cuenta", "route": "accounts.index"},
+        {"name": "Home", "route": "home.index"},
+        {"name": "My Account", "route": "accounts.index"},
     ]
     return render(request, 'accounts/index.html', {"viewData": viewData})
 
@@ -117,9 +118,9 @@ def rankings(request):
     viewData = {}
     viewData["title"] = "Divisiones"
     viewData["breadcrumbItems"] = [
-        {"name": "Inicio", "route": "home.index"},
-        {"name": "Mi Cuenta", "route": "accounts.index"},
-        {"name": "Divisiones", "route": "accounts.rankings"},
+        {"name": "Home", "route": "home.index"},
+        {"name": "My Account", "route": "accounts.index"},
+        {"name": "Rankings", "route": "accounts.rankings"},
     ]
     viewData["rankings"] = Ranking.objects.order_by('-level')
     user_points = request.user.experience_points
@@ -139,9 +140,9 @@ def redemption(request, encrypted_message):
     viewData = {}
     viewData["title"] = "Redención de puntos"
     viewData["breadcrumbItems"] = [
-        {"name": "Inicio", "route": "home.index"},
-        {"name": "Mi Cuenta", "route": "accounts.index"},
-        {"name": "Redención de puntos", "route": "accounts.redemption"},
+        {"name": "Home", "route": "home.index"},
+        {"name": "My Account", "route": "accounts.index"},
+        {"name": "Redemption", "route": "accounts.redemption"},
     ]
 
     try:
@@ -176,11 +177,14 @@ def stats(request):
     viewData = {}
     viewData["title"] = "Mis estadísticas"
     viewData["breadcrumbItems"] = [
-        {"name": "Inicio", "route": "home.index"},
-        {"name": "Mi Cuenta", "route": "accounts.index"},
-        {"name": "Estadísticas", "route": "accounts.stats"},
+        {"name": "Home", "route": "home.index"},
+        {"name": "My Account", "route": "accounts.index"},
+        {"name": "Stats", "route": "accounts.stats"},
     ]
-    viewData["user_history_entries"] = UserHistory.objects.filter(user=request.user)
+    scanning_entries = ScanningStatistics.objects.filter(user=request.user).order_by('-scan_date')
+    total_co2 = scanning_entries.aggregate(total_co2=models.Sum('co2_saved'))
+    viewData["scanning_entries"] = scanning_entries
+    viewData["total_co2"] = total_co2['total_co2'] or 0
     return render(request, 'accounts/stats.html', {"viewData": viewData})
 
 

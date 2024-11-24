@@ -58,3 +58,32 @@ class Waste(models.Model):
 
     def __str__(self):
         return f"Iteration {self.iteration} - {self.date}"
+
+
+class ScanningStatistics(models.Model):
+    WASTE_TYPES = [
+        ('BOTTLE', 'Bottle'),
+        ('PRINTED_PACKAGING', 'Printed Packaging'),
+        ('CONTAINER', 'Container'),
+        ('CAN', 'Can'),
+        ('ORGANIC', 'Organic'),
+        ('OTHER', 'Others'),
+        ('NON_RECYCLABLE_PAPER', 'Non-recyclable Paper'),
+        ('PAPERS', 'Papers'),
+        ('UNCERTAIN', 'Uncertain')
+    ]
+
+    BIN_TYPES = [
+        ('BLACK', 'Black - Non-Recyclable'),
+        ('GREEN', 'Green - Organic'),
+        ('WHITE', 'White - Recyclable'),
+    ]
+
+    scan_date = models.DateTimeField(auto_now_add=True)
+    waste_type = models.CharField(max_length=50, choices=WASTE_TYPES)
+    bin_type = models.CharField(max_length=50, choices=BIN_TYPES)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    co2_saved = models.FloatField(default=0.0)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.waste_type} - {self.scan_date}"

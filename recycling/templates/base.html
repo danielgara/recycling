@@ -33,9 +33,15 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="{% url 'home.about' %}">About</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'home.learn' %}">Learn</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'scanner.index' %}">Scanner</a></li>
           <div class="vr bg-white mx-2 d-none d-lg-block"></div>
-          <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li>
-          <li class="nav-item"><a class="nav-link" href="#!">Log In</a></li>
+          {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts.profile' %}">My Account</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts.logout' %}">Log Out</a></li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts.signup' %}">Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts.login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </div>
     </div>

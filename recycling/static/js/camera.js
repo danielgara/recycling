@@ -117,15 +117,16 @@ function takepicture() {
   }
 }
 
-LABELS = {
+const LABELS = {
   '-1': 'Incierto',
-  '0': 'Empaque impreso',
-  '1': 'Botella',
-  '2': 'Papel',
-  '3': 'Lata de aluminio',
-  '4': 'Vaso de papel',
+  '0': 'Botella',
+  '1': 'Empaque impreso',
+  '2': 'Contenedor',
+  '3': 'Lata',
+  '4': 'Orgánico',
   '5': 'Otros',
-  '6': 'Orgánico',
+  '6': 'Papel no reciclable',
+  '7': 'Papeles'
 };
 
 function getCookie(name) {
@@ -145,53 +146,60 @@ function getCookie(name) {
 
 function scanpicture(api_key, ip_server) {
   const csrftoken = getCookie('csrftoken');
-
   $('#scanspinner').removeClass('d-none');
-  serverURL = ip_server
-  photoTaken = document.getElementById("photo");
-  mbin = document.getElementById("m-bin");
-  mimg1 = document.getElementById("m-img1");
-  mimg2 = document.getElementById("m-img2");
-  mimg3 = document.getElementById("m-img3");
-  imageData = photoTaken.getAttribute("src");
-  apikey = api_key
+  
+  const serverURL = ip_server;
+  const photoTaken = document.getElementById("photo");
+  const mbin = document.getElementById("m-bin");
+  const mimg1 = document.getElementById("m-img1");
+  const mimg2 = document.getElementById("m-img2");
+  const mimg3 = document.getElementById("m-img3");
+  const imageData = photoTaken.getAttribute("src");
+  
+  // Primera llamada AJAX
   $.ajax({
     type: "POST",
-    url:serverURL,
+    url: serverURL,
     data: JSON.stringify({'frame': imageData, 'user': 'online-guest'}),
     crossDomain: true,
     dataType: 'json',
-    headers: {"x-api-key": apikey},
+    headers: {"x-api-key": api_key},
     success: function(response) {
-      responseElement = document.getElementById("scanresponse");
-      var label = LABELS.hasOwnProperty(response.prediction) ? LABELS[response.prediction] : LABELS[-1];
+      const responseElement = document.getElementById("scanresponse");
+      const label = LABELS.hasOwnProperty(response.prediction) ? LABELS[response.prediction] : LABELS[-1];
+      
       if (response.prediction == '-1' || response.prediction == '5') {
-        mbin.innerHTML = 'negra';
-        mimg1.classList.add('d-none'); mimg3.classList.add('d-none'); mimg2.classList.remove('d-none');
+        mbin.innerHTML = 'black';
+        mimg1.classList.add('d-none'); 
+        mimg3.classList.add('d-none'); 
+        mimg2.classList.remove('d-none');
       } else if (response.prediction == '6') {
-        mbin.innerHTML = 'verde';
-        mimg1.classList.add('d-none'); mimg2.classList.add('d-none'); mimg3.classList.remove('d-none');
+        mbin.innerHTML = 'green';
+        mimg1.classList.add('d-none'); 
+        mimg2.classList.add('d-none'); 
+        mimg3.classList.remove('d-none');
       } else {
-        mbin.innerHTML = 'blanca';
-        mimg2.classList.add('d-none'); mimg3.classList.add('d-none'); mimg1.classList.remove('d-none');
+        mbin.innerHTML = 'white';
+        mimg2.classList.add('d-none'); 
+        mimg3.classList.add('d-none'); 
+        mimg1.classList.remove('d-none');
       }
       responseElement.innerHTML = label;
 
-      url_save_image = '/escaneo/guardar';
-
+      // Segunda llamada AJAX para guardar
       $.ajax({
         type: "POST",
-        url: url_save_image,
-        data: JSON.stringify({'frame': imageData}),
+        url: '/escaneo/guardar',
+        data: JSON.stringify({
+          'frame': imageData,
+          'prediction': response.prediction
+        }),
         crossDomain: true,
         dataType: 'json',
         headers: {
           "X-CSRFToken": csrftoken
         },
-        success: function(response) {
-          console.log(response);
-        },
-        error: function(response) {
+        error: function() {
           alert('Error escaneando foto');
         },
       });
@@ -199,7 +207,7 @@ function scanpicture(api_key, ip_server) {
       $('#scanmodal').modal('show');
       $('#scanspinner').addClass('d-none');
     },
-    error: function(response) {
+    error: function() {
       alert('Error escaneando foto');
     },
   });
