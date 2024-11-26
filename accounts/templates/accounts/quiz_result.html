@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Quiz Results</h2>
+    
+    {% if all_correct %}
+        <div class="alert alert-success text-center" role="alert">
+            <h4 class="alert-heading">¡Outstanding! 🌟</h4>
+            <p>You got all the answers correct! You're a true recycling champion!</p>
+            <hr>
+            <p class="mb-0">Keep up the great work and continue making our planet a better place! 🌍</p>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center mb-4" role="alert">
+            <h4 class="alert-heading">Great effort! 💪</h4>
+            <p>You're on the right path to becoming a recycling expert!</p>
+            <hr>
+            <p>Remember: Every mistake is a chance to learn something new. Let's review your answers and make you even better at recycling!</p>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title text-center">Learning Opportunities:</h5>
+                {% for item in feedback %}
+                    <div class="alert alert-light border mb-3">
+                        <h6 class="alert-heading">{{ item.question }}</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Your answer:</p>
+                                <p class="text-primary">{{ item.user_answer }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Correct answer:</p>
+                                <p class="text-success">{{ item.correct_answer }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="mb-0 text-info">
+                            <i class="fas fa-lightbulb"></i> 
+                            Remember: {{ item.correct_answer }} is the right bin for this type of waste. 
+                            This helps ensure proper recycling and waste management! 
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="alert alert-success text-center" role="alert">
+            <h5 class="alert-heading">Don't give up! 🌱</h5>
+            <p>Every step towards better recycling makes a difference for our environment.</p>
+            <p class="mb-0">Ready to become a recycling master?</p>
+        </div>
+    {% endif %}
+    
+    <div class="text-center mt-4">
+        <a href="{% url 'accounts.waste_quiz' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-redo"></i> Try Again
+        </a>
+    </div>
+</div>
+{% endblock %}

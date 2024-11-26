@@ -84,6 +84,6 @@ class ScanningStatistics(models.Model):
     bin_type = models.CharField(max_length=50, choices=BIN_TYPES)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     co2_saved = models.FloatField(default=0.0)
-
+    experience = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.user.username} - {self.waste_type} - {self.scan_date}"

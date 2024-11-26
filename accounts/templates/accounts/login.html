@@ -9,7 +9,7 @@
             <div class="col-md-8">
               <div class="card shadow-lg p-3 mb-4 bg-sv-black rounded border-0 sv-border-20">
                 <div class="card-body">
-                  <b class="title-categories text-start rc-no-a font-24">Inicio de Sesión</b><br /><br />
+                  <b class="title-categories text-start rc-no-a font-24">Login</b><br /><br />
                   {% if viewData.error %}
                   <div class="alert alert-danger mt-3" role="alert">
                     {{ viewData.error }}
@@ -18,28 +18,28 @@
                   <form method="POST">
                     {% csrf_token %}
                     <p>
-                      <label for="username">Nombre de usuario</label>
+                      <label for="username">Username</label>
                       <input type="text" name="username" autocomplete="username" autofocus="" class="form-control"
                         id="username">
                     </p>
 
                     <p>
-                      <label for="password">Contraseña</label>
+                      <label for="password">Password</label>
                       <input id="password" type="password" class="form-control" name="password" required
                         autocomplete="current-password" class="form-control">
                     </p>
 
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary btn-sv btn-sv-mt d-inline-flex">
-                        Conectarse
+                        Log In
                       </button>
                       <a class="btn btn-primary btn-sv-secondary btn-svs-mt d-none d-lg-inline-block" href="{% url 'password_change' %}">
-                        Recuperar contraseña
+                        Recover Password
                       </a>
                     </div> 
                     <div class="text-center d-block d-lg-none">
                       <a class="btn btn-primary btn-sv-secondary btn-svs-mt d-inline-block" href="{% url 'password_change' %}">
-                        Recuperar contraseña
+                        Recover Password
                       </a>
                     </div>
                   </form>

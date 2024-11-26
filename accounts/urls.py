@@ -38,6 +38,8 @@ urlpatterns = [
     path('divisiones', views.rankings, name='accounts.rankings'),
     path('redimir/<str:encrypted_message>', views.redemption, name='accounts.redemption'),
     path('estadisticas', views.stats, name='accounts.stats'),
+    path('experiencia', views.experience_points, name='accounts.experience'),
     path('', views.index, name='accounts.index'),
     path('cargar_json', views.upload_json, name='accounts.upload_json'),
+    path('quiz', views.waste_quiz, name='accounts.waste_quiz'),
 ]

@@ -88,18 +88,33 @@ def save(request):
             'UNCERTAIN': 0
         }
 
+        EXPERIENCE_POINTS = {
+            'BOTTLE': 10,
+            'PRINTED_PACKAGING': 5,
+            'CONTAINER': 10,
+            'CAN': 15,
+            'ORGANIC': 20,
+            'PAPERS': 5,
+            'OTHER': 0,
+            'NON_RECYCLABLE_PAPER': 0,
+            'UNCERTAIN': 0
+        }
+
         co2_saved = CO2_SAVINGS.get(waste_type, 0)
+        experience = EXPERIENCE_POINTS.get(waste_type, 0)
 
         if request.user.is_authenticated:
             ScanningStatistics.objects.create(
                 waste_type=waste_type,
                 bin_type=bin_type,
                 user=request.user,
-                co2_saved=co2_saved
+                co2_saved=co2_saved,
+                experience=experience
             )
 
     data = {
         'status': 'success',
-        'co2_saved': co2_saved
+        'co2_saved': co2_saved,
+        'experience': experience
     }
     return JsonResponse(data)

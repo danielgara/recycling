@@ -9,6 +9,7 @@ from .utils import decrypt_message
 import json
 from datetime import datetime
 from django.db import models
+import random
 
 
 @login_required
@@ -175,7 +176,7 @@ def redemption(request, encrypted_message):
 @login_required
 def stats(request):
     viewData = {}
-    viewData["title"] = "Mis estadísticas"
+    viewData["title"] = "My Stats"
     viewData["breadcrumbItems"] = [
         {"name": "Home", "route": "home.index"},
         {"name": "My Account", "route": "accounts.index"},
@@ -214,3 +215,57 @@ def upload_json(request):
             return redirect(request.META.get('HTTP_REFERER', '/'))
     else:
         return redirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required
+def experience_points(request):
+    viewData = {}
+    viewData["title"] = "My Experience"
+    viewData["breadcrumbItems"] = [
+        {"name": "Home", "route": "home.index"},
+        {"name": "My Account", "route": "accounts.index"},
+        {"name": "Experience", "route": "accounts.experience"},
+    ]
+    scanning_entries = ScanningStatistics.objects.filter(user=request.user).order_by('-scan_date')
+    total_experience = scanning_entries.aggregate(total_experience=models.Sum('experience'))
+    viewData["scanning_entries"] = scanning_entries
+    viewData["total_experience"] = total_experience['total_experience'] or 0
+    return render(request, 'accounts/experience.html', {"viewData": viewData})
+
+def waste_quiz(request):
+    questions = [
+        {"question": "Where should you dispose of a plastic bottle?", "options": ["Black Bin", "White Bin", "Green Bin"], "answer": "White Bin"},
+        {"question": "Where should you dispose of food scraps?", "options": ["Black Bin", "White Bin", "Green Bin"], "answer": "Green Bin"},
+        {"question": "Where should you dispose of a newspaper?", "options": ["Black Bin", "White Bin", "Green Bin"], "answer": "White Bin"},
+        {"question": "Where should you dispose of a broken glass?", "options": ["Black Bin", "White Bin", "Green Bin"], "answer": "Black Bin"},
+        {"question": "Where should you dispose of a used tissue?", "options": ["Black Bin", "White Bin", "Green Bin"], "answer": "Black Bin"},
+        {"question": "Where should you dispose of a cardboard box?", "options": ["Black Bin", "White Bin", "Green Bin"], "answer": "White Bin"},
+        {"question": "Where should you dispose of coffee grounds?", "options": ["Black Bin", "White Bin", "Green Bin"], "answer": "Green Bin"},
+        {"question": "Where should you dispose of a candy wrapper?", "options": ["Black Bin", "White Bin", "Green Bin"], "answer": "Black Bin"},
+        {"question": "Where should you dispose of a magazine?", "options": ["Black Bin", "White Bin", "Green Bin"], "answer": "White Bin"},
+        {"question": "Where should you dispose of yard waste?", "options": ["Black Bin", "White Bin", "Green Bin"], "answer": "Green Bin"},
+    ]
+
+    if request.method == 'POST':
+        feedback = []
+        all_correct = True
+        
+        for i, question in enumerate(request.session['quiz_questions']):
+            user_answer = request.POST.get(f'question_{i+1}')
+            correct_answer = question['answer']
+            
+            if user_answer != correct_answer:
+                all_correct = False
+                feedback.append({
+                    'question': question['question'],
+                    'user_answer': user_answer,
+                    'correct_answer': correct_answer
+                })
+        
+        return render(request, 'accounts/quiz_result.html', {
+            'all_correct': all_correct,
+            'feedback': feedback
+        })
+
+    selected_questions = random.sample(questions, 3)
+    request.session['quiz_questions'] = selected_questions
+    return render(request, 'accounts/quiz.html', {'questions': selected_questions})

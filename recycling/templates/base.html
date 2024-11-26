@@ -36,7 +36,7 @@
           <li class="nav-item"><a class="nav-link" href="{% url 'scanner.index' %}">Scanner</a></li>
           <div class="vr bg-white mx-2 d-none d-lg-block"></div>
           {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'accounts.profile' %}">My Account</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts.index' %}">My Account</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts.logout' %}">Log Out</a></li>
           {% else %}
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts.signup' %}">Sign Up</a></li>
