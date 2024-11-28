@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='scanner.index'),
-    path('guardar', views.save, name='scanner.save'),
+    path('save', views.save, name='scanner.save'),
 ]

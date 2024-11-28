@@ -184,8 +184,16 @@ def stats(request):
     ]
     scanning_entries = ScanningStatistics.objects.filter(user=request.user).order_by('-scan_date')
     total_co2 = scanning_entries.aggregate(total_co2=models.Sum('co2_saved'))
+    
+    # Calculamos el porcentaje (1kg = 100%)
+    total_co2_value = total_co2['total_co2'] or 0
+    co2_percentage = total_co2_value * 100
+    
+    co2_percentage_str = f"{min(round(co2_percentage, 1), 100):.1f}".replace(',', '.')
+
     viewData["scanning_entries"] = scanning_entries
-    viewData["total_co2"] = total_co2['total_co2'] or 0
+    viewData["total_co2"] = total_co2_value
+    viewData["co2_percentage"] = co2_percentage_str  
     return render(request, 'accounts/stats.html', {"viewData": viewData})
 
 

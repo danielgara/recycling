@@ -39,6 +39,7 @@ def test(request):
 
 
 def save(request):
+    print("Received request at /scan/save")
     if request.method == 'POST':
         body = json.loads(request.body)
         image_data = body['frame']

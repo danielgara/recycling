@@ -6,6 +6,20 @@
       <div class="mx-auto mb-4">
         <b>Scan History</b>
         <hr />
+        <div class="mb-3">
+          <label class="form-label fw-bold">CO2 Savings Progress:</label>
+          <p class="text-muted">This bar shows your progress towards saving 1kg of CO2.</p>
+          <div class="progress mx-auto" style="height: 35px; max-width: 400px;">
+            <div class="progress-bar bg-success d-flex align-items-center justify-content-center" 
+                 role="progressbar" 
+                 style="width: {{ viewData.co2_percentage }}%;" 
+                 aria-valuenow="{{ viewData.co2_percentage }}" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100">
+              <span style="font-size: 1.2rem;" class="fw-bold">{{ viewData.co2_percentage }}%</span>
+            </div>
+          </div>
+        </div>
         <div class="alert alert-success">
           <h5>Total CO2 saved: {{ viewData.total_co2|floatformat:3 }} kg</h5>
         </div>

@@ -4,42 +4,42 @@ from . import views
 
 urlpatterns = [
     path(
-        "resetear-password/",
+        "reset-password/",
         auth_views.PasswordResetView.as_view(
             template_name="accounts/reset-password.html"
         ),
         name='password_change'
     ),
     path(
-        "resetear-password-completado/",
+        "reset-password-done/",
         auth_views.PasswordResetDoneView.as_view(
             template_name="accounts/reset-password-done.html"
         ),
         name='password_reset_done'
     ),
     path(
-        "resetear-password-finalizado/",
+        "reset-password-complete/",
         auth_views.PasswordResetCompleteView.as_view(
             template_name="accounts/reset-password-finalize.html"
         ),
         name='password_reset_complete'
     ),
     path(
-        'resetear-password-confirmacion/<uidb64>/<token>/',
+        'reset-password-confirm/<uidb64>/<token>/',
         auth_views.PasswordResetConfirmView.as_view(
             template_name='accounts/reset-password-confirm.html'
         ),
         name='password_reset_confirm'
     ),
-    path('cerrar-sesion', views.custom_logout, name='accounts.logout'),
-    path('iniciar-sesion', views.custom_login, name='accounts.login'),
-    path('registro', views.signup, name='accounts.signup'),
-    path('perfil', views.profile, name='accounts.profile'),
-    path('divisiones', views.rankings, name='accounts.rankings'),
-    path('redimir/<str:encrypted_message>', views.redemption, name='accounts.redemption'),
-    path('estadisticas', views.stats, name='accounts.stats'),
-    path('experiencia', views.experience_points, name='accounts.experience'),
+    path('logout', views.custom_logout, name='accounts.logout'),
+    path('login', views.custom_login, name='accounts.login'),
+    path('register', views.signup, name='accounts.signup'),
+    path('profile', views.profile, name='accounts.profile'),
+    path('divisions', views.rankings, name='accounts.rankings'),
+    path('redeem/<str:encrypted_message>', views.redemption, name='accounts.redemption'),
+    path('statistics', views.stats, name='accounts.stats'),
+    path('experience', views.experience_points, name='accounts.experience'),
     path('', views.index, name='accounts.index'),
-    path('cargar_json', views.upload_json, name='accounts.upload_json'),
+    path('upload_json', views.upload_json, name='accounts.upload_json'),
     path('quiz', views.waste_quiz, name='accounts.waste_quiz'),
 ]

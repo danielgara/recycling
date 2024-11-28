@@ -118,15 +118,15 @@ function takepicture() {
 }
 
 const LABELS = {
-  '-1': 'Incierto',
-  '0': 'Botella',
-  '1': 'Empaque impreso',
-  '2': 'Contenedor',
-  '3': 'Lata',
-  '4': 'Orgánico',
-  '5': 'Otros',
-  '6': 'Papel no reciclable',
-  '7': 'Papeles'
+  '-1': 'Uncertain',
+  '0': 'Bottle',
+  '1': 'Printed Packaging',
+  '2': 'Container',
+  '3': 'Can',
+  '4': 'Organic',
+  '5': 'Other',
+  '6': 'Non-recyclable Paper',
+  '7': 'Papers'
 };
 
 function getCookie(name) {
@@ -185,22 +185,29 @@ function scanpicture(api_key, ip_server) {
         mimg1.classList.remove('d-none');
       }
       responseElement.innerHTML = label;
-
-      // Segunda llamada AJAX para guardar
       $.ajax({
         type: "POST",
-        url: '/escaneo/guardar',
+        url: '/scan/save', 
         data: JSON.stringify({
           'frame': imageData,
           'prediction': response.prediction
         }),
+        beforeSend: function(xhr, settings) {
+          console.log('URL final de la petición:', settings.url);
+        },
         crossDomain: true,
         dataType: 'json',
         headers: {
           "X-CSRFToken": csrftoken
         },
-        error: function() {
-          alert('Error escaneando foto');
+        error: function(xhr, status, error) {
+          console.error('Error details:', {
+            status: status,
+            error: error,
+            responseText: xhr.responseText,
+            url: xhr.responseURL
+          });
+          alert('Error scanning photo');
         },
       });
 
@@ -208,7 +215,7 @@ function scanpicture(api_key, ip_server) {
       $('#scanspinner').addClass('d-none');
     },
     error: function() {
-      alert('Error escaneando foto');
+      alert('Error scanning photo');
     },
   });
 }
